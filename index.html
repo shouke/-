@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>--数据结构 by shouke</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">--数据结构</h1>
+      <h2 class="project-tagline">快速排序算法</h2>
+      <a href="https://github.com/shouke/--" class="btn">View on GitHub</a>
+      <a href="https://github.com/shouke/--/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/shouke/--/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h3>
+<a id="快速排序算法的基本思想" class="anchor" href="#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>快速排序算法的基本思想</h3>
+
+<p>快速排序算发的基本思想是选择一个基准（一般是数组的第一个元素），然后给这个基准找一个合适的位置，使得数组分为两个部分，前一部分子数组都比该基准小，后一子数组都比该基准大，然后一迭代的方法对两个子数组再进行快速排序。通过递归实现全部排序。</p>
+
+<p>int quicksort(vector &amp;v, int left, int right){
+        if(left &lt; right){
+                int key = v[left];
+                int low = left;
+                int high = right;
+                while(low &lt; high){
+                        while(low &lt; high &amp;&amp; v[high] &gt; key){
+                                high--;
+                        }
+                        if(low &lt; high)
+                           v[low++] = v[high];
+                        while(low &lt; high &amp;&amp; v[low] &lt; key){
+                                low++;
+                        }
+                        // 可能已经结束了, 赋值时候需要移位
+                        if(low &lt; high)
+                           v[high--] = v[low];
+                }
+                v[low] = key;
+                quicksort(v,left,low-1);
+                quicksort(v,low+1,right);
+        }
+}</p>
+
+<h3>
+<a id="接口改变的快速排序算法" class="anchor" href="#%E6%8E%A5%E5%8F%A3%E6%94%B9%E5%8F%98%E7%9A%84%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>接口改变的快速排序算法</h3>
+
+<p>一般快速排序算法需要传三个参数int quicksort(vector &amp;v, int left, int right)，这里可以其实传递数组的头指针，与数组的的长度。具体的实现长度如下所示：</p>
+
+<h1>
+<a id="include-" class="anchor" href="#include-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>include </h1>
+
+<h1>
+<a id="include--1" class="anchor" href="#include--1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>include </h1>
+
+<h1>
+<a id="include--2" class="anchor" href="#include--2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>include </h1>
+
+<h1>
+<a id="include" class="anchor" href="#include" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>include</h1>
+
+<p>using namespace std;</p>
+
+<p>void quicksort(int <em>data,int count)
+{
+    int tmp=</em>data;<br>
+    int <em>p_start=data;
+    int *p_end=(data+count-1);
+    int *start=data;
+    int *end=(data+count-1);
+    int len1=0,len2=0;
+    if(count&lt;=1)
+    {
+        return;
+    }
+    while(start&lt;end)
+    {
+        while(start&lt;end&amp;&amp;</em>end&gt;tmp)
+        {
+            end--;
+        }
+        if(start&lt;end)
+        {
+            <em>start++=</em>end;
+        }</p>
+
+<pre><code>    while(start&lt;end&amp;&amp;*start&lt;tmp)
+    {
+        start++;
+    }
+    if(start&lt;end)
+    {
+        *end--=*start;      
+    }
+
+}
+*start=tmp; 
+len1=start-data;
+len2=p_end-start;
+quicksort(data,len1);
+quicksort(start+1,len2);
+</code></pre>
+
+<p>}</p>
+
+<p>int main()
+{</p>
+
+<p>int a[10]={18,45,9,4,24,5,6,18,2,3};
+quicksort(a,10);
+for(int i=0;i&lt;10;i++)
+cout&lt;&lt;a[i]&lt;&lt;" "&lt;&lt;endl;
+}
+  第一次写博客，逻辑有点混乱，以后慢慢改。希望圈里的朋友多多指教，相互学习。
+We’ve crafted some handsome templates for you to use. Go ahead and click 'Continue to layouts' to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved.</p>
+
+<h3>
+<a id="creating-pages-manually" class="anchor" href="#creating-pages-manually" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Creating pages manually</h3>
+
+<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+
+<h3>
+<a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+
+<p>You can @mention a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor’s GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+
+<h3>
+<a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Support or Contact</h3>
+
+<p>Having trouble with Pages? Check out our <a href="https://help.github.com/pages">documentation</a> or <a href="https://github.com/contact">contact support</a> and we’ll help you sort it out.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/shouke/--">--数据结构</a> is maintained by <a href="https://github.com/shouke">shouke</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
